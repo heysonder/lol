@@ -2,176 +2,300 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>lol</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Cum, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A no-shame guide to semen and ejaculation: what's normal, what isn't, and when to see a doctor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
+  /* Layout: one readable column, health-pamphlet plainness; sections separated by space, not boxes. */
   :root {
-    --bg: #fdf6e3;
-    --card: #ffffff;
-    --ink: #1f1d1a;
-    --muted: #6b665e;
-    --accent: #e4572e;
-    --accent-ink: #ffffff;
-    --shadow: 0 10px 30px rgba(0,0,0,.08);
+    --bg: #f1f4f6;
+    --surface: #ffffff;
+    --ink: #142029;
+    --muted: #55636d;
+    --line: #d5dde2;
+    --accent: #2753c9;
+    --accent-soft: #e2e9fb;
+    --ok: #1f7a4d;   --ok-bg: #dff2e7;
+    --warn: #8a5a00; --warn-bg: #fbefd4;
+    --bad: #b3261e;  --bad-bg: #fbe1de;
+    --seg1: #2753c9; --seg2: #6f8fe6; --seg3: #b3c4f2; --seg4: #142029;
+    --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #16151a;
-      --card: #222129;
-      --ink: #f1efe9;
-      --muted: #a29e96;
-      --accent: #ff7a50;
-      --accent-ink: #16151a;
-      --shadow: 0 10px 30px rgba(0,0,0,.4);
+    :root:not([data-theme="light"]) {
+      --bg: #10161b; --surface: #19222a; --ink: #e8eef2; --muted: #9aa8b2; --line: #2b3741;
+      --accent: #86a4ff; --accent-soft: #1e2b4d;
+      --ok: #7fd4a6; --ok-bg: #143224; --warn: #f2c66b; --warn-bg: #3a2c0f; --bad: #ff9b92; --bad-bg: #3f1a17;
+      --seg1: #86a4ff; --seg2: #5675d6; --seg3: #34477f; --seg4: #e8eef2;
+      color-scheme: dark;
     }
   }
+  :root[data-theme="dark"] {
+    --bg: #10161b; --surface: #19222a; --ink: #e8eef2; --muted: #9aa8b2; --line: #2b3741;
+    --accent: #86a4ff; --accent-soft: #1e2b4d;
+    --ok: #7fd4a6; --ok-bg: #143224; --warn: #f2c66b; --warn-bg: #3a2c0f; --bad: #ff9b92; --bad-bg: #3f1a17;
+    --seg1: #86a4ff; --seg2: #5675d6; --seg3: #34477f; --seg4: #e8eef2;
+    color-scheme: dark;
+  }
+
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    padding: 24px 16px;
     background: var(--bg);
     color: var(--ink);
-    font: 18px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 17px/1.6 var(--font-body);
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
   }
-  main { width: 100%; max-width: 560px; text-align: center; }
-  h1 {
-    font-size: clamp(48px, 14vw, 96px);
-    margin: 0 0 4px;
-    letter-spacing: -0.04em;
+  .wrap { max-width: 760px; margin: 0 auto; padding-block: 48px 72px; display: grid; gap: 72px; }
+  h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.1; }
+  h2 { font-size: clamp(28px, 5vw, 38px); font-weight: 700; letter-spacing: -0.02em; }
+  h3 { font-size: 19px; font-weight: 700; }
+  p { margin: 0; }
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  section { display: grid; gap: 20px; }
+  .lede { color: var(--muted); max-width: 62ch; }
+  .eyebrow { font: 500 12px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+
+  /* Hero */
+  header { display: grid; gap: 18px; }
+  header h1 { font-size: clamp(52px, 12vw, 104px); font-weight: 800; letter-spacing: -0.04em; }
+  header h1 span { color: var(--accent); }
+  header .lede { font-size: 20px; color: var(--ink); }
+  .note { font-size: 14px; color: var(--muted); border-left: 3px solid var(--line); padding-left: 12px; }
+
+  /* Glossary */
+  dl { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  dl > div { background: var(--surface); padding: 16px 18px; display: grid; gap: 4px; min-width: 0; }
+  dt { font-weight: 600; }
+  dt small { font-weight: 400; color: var(--muted); }
+  dd { margin: 0; color: var(--muted); font-size: 15px; }
+
+  /* Composition */
+  .bar { display: flex; height: 44px; border-radius: 10px; overflow: hidden; }
+  .bar > div { height: 100%; }
+  .legend { display: grid; gap: 10px; padding: 0; margin: 0; list-style: none; }
+  .legend li { display: grid; grid-template-columns: 14px 1fr auto; gap: 12px; align-items: baseline; }
+  .sw { width: 14px; height: 14px; border-radius: 3px; transform: translateY(2px); }
+  .pct { font: 500 14px var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+  .stat { background: var(--surface); border-radius: 12px; padding: 16px; display: grid; gap: 4px; align-content: start; }
+  .stat b { font: 700 26px/1.1 var(--font-display); }
+  .stat span { font-size: 14px; color: var(--muted); }
+
+  /* Is this normal */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+  .filters button {
+    font: 500 14px var(--font-body); cursor: pointer; border-radius: 999px; padding: 8px 14px;
+    background: transparent; color: var(--ink); border: 1px solid var(--line);
   }
-  .sub { color: var(--muted); margin: 0 0 28px; }
-  .card {
-    background: var(--card);
-    border-radius: 18px;
-    padding: 28px 24px;
-    box-shadow: var(--shadow);
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 16px;
+  .filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .checks li { background: var(--surface); border-radius: 12px; padding: 16px 18px; display: grid; gap: 6px; border-left: 4px solid var(--edge); }
+  .checks li[data-s="ok"] { --edge: var(--ok); }
+  .checks li[data-s="watch"] { --edge: var(--warn); }
+  .checks li[data-s="doc"] { --edge: var(--bad); }
+  .row { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; }
+  .pill { font: 500 12px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 6px 9px; border-radius: 999px; white-space: nowrap; }
+  .pill.ok { color: var(--ok); background: var(--ok-bg); }
+  .pill.watch { color: var(--warn); background: var(--warn-bg); }
+  .pill.doc { color: var(--bad); background: var(--bad-bg); }
+  .checks p { color: var(--muted); font-size: 15px; }
+
+  /* Myths */
+  .myths { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+  .myth {
+    text-align: left; font: inherit; color: inherit; cursor: pointer; border: 1px solid var(--line);
+    background: var(--surface); border-radius: 12px; padding: 18px; display: grid; gap: 10px; align-content: start; min-width: 0;
   }
-  .setup { font-size: 1.25em; font-weight: 600; margin: 0; }
-  .punch {
-    margin: 0;
-    font-size: 1.1em;
-    color: var(--accent);
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity .25s, transform .25s;
-  }
-  .punch.show { opacity: 1; transform: none; }
-  .buttons { display: flex; gap: 12px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
-  button {
-    font: inherit;
-    font-weight: 600;
-    border: 0;
-    border-radius: 999px;
-    padding: 12px 22px;
-    cursor: pointer;
-    background: var(--accent);
-    color: var(--accent-ink);
-    transition: transform .1s;
-  }
-  button.ghost { background: transparent; color: var(--ink); outline: 2px solid var(--muted); }
-  button:active { transform: scale(.96); }
-  button:disabled { opacity: .4; cursor: default; }
-  .count { color: var(--muted); font-size: .85em; margin-top: 18px; }
-  .rimshot { display: inline-block; }
-  .rimshot.go { animation: shake .4s; }
-  @keyframes shake {
-    0%,100% { transform: rotate(0); }
-    25% { transform: rotate(-8deg); }
-    75% { transform: rotate(8deg); }
+  .myth .tag { font: 500 12px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--bad); }
+  .myth .claim { font-weight: 600; }
+  .myth .fact { color: var(--muted); font-size: 15px; }
+  .myth .hint { font-size: 13px; color: var(--accent); }
+  .myth[aria-expanded="true"] { border-color: var(--accent); }
+  .myth[aria-expanded="true"] .tag { color: var(--ok); }
+  .myth[aria-expanded="true"] .hint { display: none; }
+
+  /* Steps + talk */
+  ol.steps { margin: 0; padding-left: 1.4em; display: grid; gap: 10px; }
+  ol.steps li::marker { font-family: var(--font-mono); color: var(--accent); }
+  ul.plain { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
+  .callout { background: var(--accent-soft); border-radius: 12px; padding: 18px 20px; display: grid; gap: 8px; }
+  .scripts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .script { background: var(--surface); border-radius: 12px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+  .script q { font-style: italic; }
+  .script .who { font: 500 12px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+  footer { display: grid; gap: 12px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 24px; }
+  footer ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .filters button, .myth { transition: background .15s, border-color .15s, color .15s; }
   }
 </style>
 </head>
 <body>
-<main>
-  <h1><span class="rimshot" id="logo">lol</span></h1>
-  <p class="sub">jokes of questionable quality</p>
 
-  <div class="card">
-    <p class="setup" id="setup"></p>
-    <p class="punch" id="punch"></p>
-  </div>
+<div class="wrap">
 
-  <div class="buttons">
-    <button id="reveal">Reveal</button>
-    <button class="ghost" id="next">Next joke</button>
+<header>
+  <p class="eyebrow">A no-shame guide</p>
+  <h1>Cum, <span>explained.</span></h1>
+  <p class="lede">Almost every guy has questions about semen and ejaculation and almost nobody asks them. Here's what's normal, what isn't, and when it's worth seeing a doctor.</p>
+  <p class="note">Made for a sex ed project. This is general health information, not medical advice. If something worries you, a doctor or clinic has heard it all before.</p>
+</header>
+
+<section aria-labelledby="words">
+  <h2 id="words">The words</h2>
+  <p class="lede">Slang is fine. Knowing the medical words helps when you talk to a doctor or look something up.</p>
+  <dl>
+    <div><dt>Semen <small>/ cum</small></dt><dd>The fluid that comes out when you ejaculate. Sperm are only a small part of it.</dd></div>
+    <div><dt>Ejaculation <small>/ nutting, coming</small></dt><dd>The muscle contractions that push semen out, usually at orgasm.</dd></div>
+    <div><dt>Pre-ejaculate <small>/ precum</small></dt><dd>Clear fluid that comes out when you're aroused, before ejaculation.</dd></div>
+    <div><dt>Orgasm</dt><dd>The peak feeling. It usually happens with ejaculation, but the two can happen separately.</dd></div>
+    <div><dt>Nocturnal emission <small>/ wet dream</small></dt><dd>Ejaculating in your sleep. Most common in the teen years, and completely normal.</dd></div>
+    <div><dt>Refractory period</dt><dd>The recovery time after ejaculating before you can get hard or come again. It ranges from minutes to a day and tends to get longer with age.</dd></div>
+  </dl>
+</section>
+
+<section aria-labelledby="whats-in-it">
+  <h2 id="whats-in-it">What's actually in it</h2>
+  <p class="lede">Most of semen comes from glands, not the testicles. Sperm are a few percent of the volume. The rest is fluid that feeds and protects them.</p>
+  <div class="bar" role="img" aria-label="Approximate makeup of semen: seminal vesicle fluid about 70 percent, prostate fluid about 25 percent, sperm about 2 to 5 percent, other glands under 1 percent.">
+    <div style="width:69%;background:var(--seg1)"></div>
+    <div style="width:26%;background:var(--seg2)"></div>
+    <div style="width:4%;background:var(--seg3)"></div>
+    <div style="width:1%;background:var(--seg4)"></div>
   </div>
-  <p class="count" id="count"></p>
-</main>
+  <ul class="legend">
+    <li><span class="sw" style="background:var(--seg1)"></span><span><b>Seminal vesicles.</b> Sugar (fructose) for energy and proteins that make it thick.</span><span class="pct">~65–75%</span></li>
+    <li><span class="sw" style="background:var(--seg2)"></span><span><b>Prostate.</b> Enzymes that make it go watery again, plus zinc.</span><span class="pct">~25–30%</span></li>
+    <li><span class="sw" style="background:var(--seg3)"></span><span><b>Sperm</b> from the testicles. Tens of millions per mL.</span><span class="pct">~2–5%</span></li>
+    <li><span class="sw" style="background:var(--seg4)"></span><span><b>Other glands.</b> Mostly precum, which lubricates the urethra.</span><span class="pct">&lt;1%</span></li>
+  </ul>
+  <div class="stats">
+    <div class="stat"><b>1.5–5 mL</b><span>Typical amount. A teaspoon is 5 mL.</span></div>
+    <div class="stat"><b>pH 7.2–8.0</b><span>Slightly alkaline. That's part of why it smells a bit like bleach.</span></div>
+    <div class="stat"><b>15–30 min</b><span>Time for it to go from thick and jelly-like to watery.</span></div>
+    <div class="stat"><b>~2.5 months</b><span>Time to make a sperm cell from start to finish. Production never stops.</span></div>
+  </div>
+</section>
+
+<section aria-labelledby="normal">
+  <h2 id="normal">Is this normal?</h2>
+  <p class="lede">Semen changes with how often you ejaculate, how hydrated you are, and your age. Most variation is nothing. Here's how to tell.</p>
+  <div class="filters" role="group" aria-label="Filter by status">
+    <button type="button" id="f-all" data-f="all" aria-pressed="true">Everything</button>
+    <button type="button" id="f-ok" data-f="ok" aria-pressed="false">Normal</button>
+    <button type="button" id="f-watch" data-f="watch" aria-pressed="false">Keep an eye on it</button>
+    <button type="button" id="f-doc" data-f="doc" aria-pressed="false">See a doctor</button>
+  </div>
+  <ul class="checks" id="checks">
+    <li data-s="ok"><div class="row"><h3>White, gray, or cloudy</h3><span class="pill ok">Normal</span></div><p>This is the usual color.</p></li>
+    <li data-s="ok"><div class="row"><h3>A little yellowish</h3><span class="pill ok">Normal</span></div><p>Common after a long time without ejaculating, or if some urine mixes in.</p></li>
+    <li data-s="ok"><div class="row"><h3>Thick and clumpy, or thin and watery</h3><span class="pill ok">Normal</span></div><p>It's thick at first and turns watery within half an hour. It's thinner if you ejaculate often.</p></li>
+    <li data-s="ok"><div class="row"><h3>Less than usual after coming a lot</h3><span class="pill ok">Normal</span></div><p>Your body needs time to refill. Volume also drops slowly with age.</p></li>
+    <li data-s="ok"><div class="row"><h3>Wet dreams</h3><span class="pill ok">Normal</span></div><p>Not a sign of anything. They often happen less once you ejaculate more regularly.</p></li>
+    <li data-s="ok"><div class="row"><h3>Sore or achy balls after arousal without finishing</h3><span class="pill ok">Normal</span></div><p>Often called "blue balls." It's uncomfortable but harmless, and it goes away on its own. It's never a reason to pressure anyone into anything.</p></li>
+    <li data-s="watch"><div class="row"><h3>Finishing sooner than you want</h3><span class="pill watch">Keep an eye on it</span></div><p>Extremely common, especially when you're young or nervous. Stop-start techniques and pelvic floor exercises help. If it keeps bothering you, a doctor can help and won't judge.</p></li>
+    <li data-s="watch"><div class="row"><h3>Taking a long time, or not being able to finish</h3><span class="pill watch">Keep an eye on it</span></div><p>Stress, alcohol, and some medications (like certain antidepressants) can cause this. Bring it up with a doctor if it keeps happening.</p></li>
+    <li data-s="watch"><div class="row"><h3>Orgasm with little or nothing coming out</h3><span class="pill watch">Keep an eye on it</span></div><p>Some medications, surgery, and diabetes can cause a "dry orgasm" or send semen backward into the bladder. Not dangerous, but worth mentioning to a doctor, especially if you want kids someday.</p></li>
+    <li data-s="doc"><div class="row"><h3>Pink, red, or brown</h3><span class="pill doc">See a doctor</span></div><p>That's blood. In younger men it's often harmless and goes away on its own, but get it checked, especially if it keeps happening or you're over 40.</p></li>
+    <li data-s="doc"><div class="row"><h3>Green, or yellow with a bad smell</h3><span class="pill doc">See a doctor</span></div><p>Could be an infection, including an STI.</p></li>
+    <li data-s="doc"><div class="row"><h3>Pain or burning when you ejaculate or pee</h3><span class="pill doc">See a doctor</span></div><p>Often an infection or prostate inflammation. Both are treatable.</p></li>
+    <li data-s="doc"><div class="row"><h3>Discharge when you're not aroused</h3><span class="pill doc">See a doctor</span></div><p>Drip from the penis that isn't urine, semen, or precum is a common STI sign.</p></li>
+  </ul>
+</section>
+
+<section aria-labelledby="myths">
+  <h2 id="myths">Myths</h2>
+  <p class="lede">Tap a card to see what's actually true.</p>
+  <div class="myths" id="myth-list">
+    <button type="button" class="myth" id="m1" aria-expanded="false"><span class="tag">Myth</span><span class="claim">Masturbating a lot will hurt you.</span><span class="fact" hidden>It won't cause blindness, infertility, acne, or hair loss. It's only a problem if it's getting in the way of your life.</span><span class="hint">Show the facts</span></button>
+    <button type="button" class="myth" id="m2" aria-expanded="false"><span class="tag">Myth</span><span class="claim">You can run out of sperm.</span><span class="fact" hidden>You make millions every day. Volume dips if you come often, then refills within a few days.</span><span class="hint">Show the facts</span></button>
+    <button type="button" class="myth" id="m3" aria-expanded="false"><span class="tag">Myth</span><span class="claim">Precum can't get anyone pregnant.</span><span class="fact" hidden>Studies have found live sperm in some men's precum. It can also carry STIs.</span><span class="hint">Show the facts</span></button>
+    <button type="button" class="myth" id="m4" aria-expanded="false"><span class="tag">Myth</span><span class="claim">Pulling out is reliable birth control.</span><span class="fact" hidden>With typical use, about 1 in 5 couples who rely on it get pregnant within a year. It also does nothing against STIs.</span><span class="hint">Show the facts</span></button>
+    <button type="button" class="myth" id="m5" aria-expanded="false"><span class="tag">Myth</span><span class="claim">Holding it in (semen retention) makes you stronger.</span><span class="fact" hidden>There's no solid evidence of lasting benefits. Sperm that isn't released just gets reabsorbed by your body.</span><span class="hint">Show the facts</span></button>
+    <button type="button" class="myth" id="m6" aria-expanded="false"><span class="tag">Myth</span><span class="claim">More cum means more fertile or more manly.</span><span class="fact" hidden>Volume depends on time since you last came, hydration, and age. It doesn't say much about fertility, and nothing about masculinity.</span><span class="hint">Show the facts</span></button>
+    <button type="button" class="myth" id="m7" aria-expanded="false"><span class="tag">Myth</span><span class="claim">Sperm can get someone pregnant from a hot tub or toilet seat.</span><span class="fact" hidden>Sperm die quickly once semen dries or gets diluted outside the body. Inside the body they can live up to 5 days.</span><span class="hint">Show the facts</span></button>
+    <button type="button" class="myth" id="m8" aria-expanded="false"><span class="tag">Myth</span><span class="claim">Ejaculating often is bad for your health.</span><span class="fact" hidden>A large Harvard study found men who ejaculated 21 or more times a month had a somewhat lower prostate cancer risk. That's a link, not proof, but there's no sign it's harmful.</span><span class="hint">Show the facts</span></button>
+  </div>
+</section>
+
+<section aria-labelledby="protect">
+  <h2 id="protect">Protection</h2>
+  <p class="lede">Semen and precum can carry HIV, chlamydia, gonorrhea, syphilis, hepatitis B, and other infections. Many STIs have no symptoms, so you can have one and not know.</p>
+  <ul class="plain">
+    <li>Put a condom on <b>before</b> any genital contact, not just before you finish.</li>
+    <li>Get tested regularly if you're sexually active, even without symptoms. Many clinics test for free or cheap, and teens can often get tested confidentially.</li>
+    <li>Ask a doctor about the HPV vaccine and, if it fits your situation, PrEP to prevent HIV.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="selfcheck">
+  <h2 id="selfcheck">The monthly self-check</h2>
+  <p class="lede">Testicular cancer is one of the most common cancers in young men, and it's very treatable when caught early. Checking takes a minute.</p>
+  <ol class="steps">
+    <li>Do it in or after a warm shower, when the skin is relaxed.</li>
+    <li>Hold one testicle at a time and roll it gently between your thumb and fingers.</li>
+    <li>Feel for hard lumps, swelling, or changes in size or firmness. One being slightly bigger or lower is normal.</li>
+    <li>The soft tube at the back is the epididymis. That's supposed to be there.</li>
+    <li>If anything is new, painless, and hard, see a doctor soon. Most lumps turn out to be harmless, but don't wait to find out.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="talk">
+  <h2 id="talk">Talking about it</h2>
+  <p class="lede">The awkward part is usually just the first sentence. Some ways to start:</p>
+  <div class="scripts">
+    <div class="script"><span class="who">To a doctor</span><q>I've noticed blood in my semen a couple of times. Is that something we should check?</q></div>
+    <div class="script"><span class="who">To a partner</span><q>I want to use a condom. Let's grab one before we go further.</q></div>
+    <div class="script"><span class="who">To a doctor</span><q>I finish a lot faster than I want to. What are my options?</q></div>
+    <div class="script"><span class="who">To a friend</span><q>Is it just me or did nobody ever explain any of this to us?</q></div>
+  </div>
+  <div class="callout">
+    <h3>Why talk about it at all?</h3>
+    <p>When something's treated as gross or embarrassing, people stop asking questions. They miss signs of an infection, believe myths about pregnancy, or feel broken over things that are normal. Talking about it plainly fixes that.</p>
+  </div>
+</section>
+
+<footer>
+  <p><b>Sources</b></p>
+  <ul>
+    <li>World Health Organization, <i>Laboratory Manual for the Examination and Processing of Human Semen</i>, 6th ed. (2021)</li>
+    <li>CDC, <a href="https://www.cdc.gov/contraception/about/index.html" target="_blank" rel="noopener">Contraception effectiveness</a></li>
+    <li>Mayo Clinic, <a href="https://www.mayoclinic.org/symptoms/blood-in-semen/basics/definition/sym-20050603" target="_blank" rel="noopener">Blood in semen</a></li>
+    <li>NHS, <a href="https://www.nhs.uk/conditions/testicular-cancer/" target="_blank" rel="noopener">Testicular cancer</a></li>
+    <li>Killick et al., "Sperm content of pre-ejaculatory fluid," <i>Human Fertility</i> (2011)</li>
+    <li>Rider et al., "Ejaculation frequency and risk of prostate cancer," <i>European Urology</i> (2016)</li>
+  </ul>
+  <p>General information for a sex ed class project. Not a substitute for a doctor.</p>
+</footer>
+
+</div>
 
 <script>
-const jokes = [
-  ["I told my computer I needed a break.", "It said: \"No problem, I'll go to sleep.\""],
-  ["Why do programmers prefer dark mode?", "Because light attracts bugs."],
-  ["I'm reading a book about anti-gravity.", "It's impossible to put down."],
-  ["Why did the scarecrow win an award?", "He was outstanding in his field."],
-  ["What do you call a fake noodle?", "An impasta."],
-  ["Why don't skeletons fight each other?", "They don't have the guts."],
-  ["I used to hate facial hair.", "But then it grew on me."],
-  ["Why can't you trust an atom?", "They make up everything."],
-  ["How do you comfort a JavaScript developer?", "You console them."],
-  ["What's a pirate's least favorite letter?", "Dear Sir, we regret to inform you…"],
-  ["Why did the developer go broke?", "Because he used up all his cache."],
-  ["I only know 25 letters of the alphabet.", "I don't know y."],
-  ["What do you call a bear with no teeth?", "A gummy bear."],
-  ["Why was the math book sad?", "It had too many problems."],
-  ["There are 10 kinds of people in the world.", "Those who understand binary and those who don't."],
-  ["What did the ocean say to the beach?", "Nothing, it just waved."],
-  ["Why did the git commit break up with the branch?", "It needed some space to rebase."],
-  ["I asked the librarian if they had books on paranoia.", "She whispered, \"They're right behind you.\""],
-  ["What do you call cheese that isn't yours?", "Nacho cheese."],
-  ["Why do cows wear bells?", "Because their horns don't work."],
-];
+  const filters = document.querySelectorAll(".filters button");
+  const items = document.querySelectorAll("#checks li");
+  filters.forEach(btn => btn.addEventListener("click", () => {
+    filters.forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+    const f = btn.dataset.f;
+    items.forEach(li => { li.hidden = f !== "all" && li.dataset.s !== f; });
+  }));
 
-const $ = id => document.getElementById(id);
-let order = [], pos = -1;
-
-function shuffle() {
-  order = jokes.map((_, i) => i);
-  for (let i = order.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [order[i], order[j]] = [order[j], order[i]];
-  }
-}
-
-function next() {
-  pos++;
-  if (pos >= order.length) { shuffle(); pos = 0; }
-  const [setup, punch] = jokes[order[pos]];
-  $("setup").textContent = setup;
-  $("punch").textContent = punch;
-  $("punch").classList.remove("show");
-  $("reveal").disabled = false;
-  $("count").textContent = `joke ${pos + 1} of ${order.length}`;
-}
-
-function reveal() {
-  $("punch").classList.add("show");
-  $("reveal").disabled = true;
-  const logo = $("logo");
-  logo.classList.remove("go");
-  void logo.offsetWidth;
-  logo.classList.add("go");
-}
-
-$("reveal").onclick = reveal;
-$("next").onclick = next;
-document.addEventListener("keydown", e => {
-  if (e.key === " " || e.key === "Enter") {
-    e.preventDefault();
-    $("reveal").disabled ? next() : reveal();
-  }
-});
-
-shuffle();
-next();
+  document.querySelectorAll(".myth").forEach(card => card.addEventListener("click", () => {
+    const open = card.getAttribute("aria-expanded") !== "true";
+    card.setAttribute("aria-expanded", String(open));
+    card.querySelector(".fact").hidden = !open;
+    card.querySelector(".tag").textContent = open ? "Fact" : "Myth";
+  }));
 </script>
 </body>
 </html>
