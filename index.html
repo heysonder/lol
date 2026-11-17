@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>lol</title>
+<style>
+  :root {
+    --bg: #fdf6e3;
+    --card: #ffffff;
+    --ink: #1f1d1a;
+    --muted: #6b665e;
+    --accent: #e4572e;
+    --accent-ink: #ffffff;
+    --shadow: 0 10px 30px rgba(0,0,0,.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16151a;
+      --card: #222129;
+      --ink: #f1efe9;
+      --muted: #a29e96;
+      --accent: #ff7a50;
+      --accent-ink: #16151a;
+      --shadow: 0 10px 30px rgba(0,0,0,.4);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px 16px;
+    background: var(--bg);
+    color: var(--ink);
+    font: 18px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  main { width: 100%; max-width: 560px; text-align: center; }
+  h1 {
+    font-size: clamp(48px, 14vw, 96px);
+    margin: 0 0 4px;
+    letter-spacing: -0.04em;
+  }
+  .sub { color: var(--muted); margin: 0 0 28px; }
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+  }
+  .setup { font-size: 1.25em; font-weight: 600; margin: 0; }
+  .punch {
+    margin: 0;
+    font-size: 1.1em;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .25s, transform .25s;
+  }
+  .punch.show { opacity: 1; transform: none; }
+  .buttons { display: flex; gap: 12px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+  button {
+    font: inherit;
+    font-weight: 600;
+    border: 0;
+    border-radius: 999px;
+    padding: 12px 22px;
+    cursor: pointer;
+    background: var(--accent);
+    color: var(--accent-ink);
+    transition: transform .1s;
+  }
+  button.ghost { background: transparent; color: var(--ink); outline: 2px solid var(--muted); }
+  button:active { transform: scale(.96); }
+  button:disabled { opacity: .4; cursor: default; }
+  .count { color: var(--muted); font-size: .85em; margin-top: 18px; }
+  .rimshot { display: inline-block; }
+  .rimshot.go { animation: shake .4s; }
+  @keyframes shake {
+    0%,100% { transform: rotate(0); }
+    25% { transform: rotate(-8deg); }
+    75% { transform: rotate(8deg); }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1><span class="rimshot" id="logo">lol</span></h1>
+  <p class="sub">jokes of questionable quality</p>
+
+  <div class="card">
+    <p class="setup" id="setup"></p>
+    <p class="punch" id="punch"></p>
+  </div>
+
+  <div class="buttons">
+    <button id="reveal">Reveal</button>
+    <button class="ghost" id="next">Next joke</button>
+  </div>
+  <p class="count" id="count"></p>
+</main>
+
+<script>
+const jokes = [
+  ["I told my computer I needed a break.", "It said: \"No problem, I'll go to sleep.\""],
+  ["Why do programmers prefer dark mode?", "Because light attracts bugs."],
+  ["I'm reading a book about anti-gravity.", "It's impossible to put down."],
+  ["Why did the scarecrow win an award?", "He was outstanding in his field."],
+  ["What do you call a fake noodle?", "An impasta."],
+  ["Why don't skeletons fight each other?", "They don't have the guts."],
+  ["I used to hate facial hair.", "But then it grew on me."],
+  ["Why can't you trust an atom?", "They make up everything."],
+  ["How do you comfort a JavaScript developer?", "You console them."],
+  ["What's a pirate's least favorite letter?", "Dear Sir, we regret to inform you…"],
+  ["Why did the developer go broke?", "Because he used up all his cache."],
+  ["I only know 25 letters of the alphabet.", "I don't know y."],
+  ["What do you call a bear with no teeth?", "A gummy bear."],
+  ["Why was the math book sad?", "It had too many problems."],
+  ["There are 10 kinds of people in the world.", "Those who understand binary and those who don't."],
+  ["What did the ocean say to the beach?", "Nothing, it just waved."],
+  ["Why did the git commit break up with the branch?", "It needed some space to rebase."],
+  ["I asked the librarian if they had books on paranoia.", "She whispered, \"They're right behind you.\""],
+  ["What do you call cheese that isn't yours?", "Nacho cheese."],
+  ["Why do cows wear bells?", "Because their horns don't work."],
+];
+
+const $ = id => document.getElementById(id);
+let order = [], pos = -1;
+
+function shuffle() {
+  order = jokes.map((_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+}
+
+function next() {
+  pos++;
+  if (pos >= order.length) { shuffle(); pos = 0; }
+  const [setup, punch] = jokes[order[pos]];
+  $("setup").textContent = setup;
+  $("punch").textContent = punch;
+  $("punch").classList.remove("show");
+  $("reveal").disabled = false;
+  $("count").textContent = `joke ${pos + 1} of ${order.length}`;
+}
+
+function reveal() {
+  $("punch").classList.add("show");
+  $("reveal").disabled = true;
+  const logo = $("logo");
+  logo.classList.remove("go");
+  void logo.offsetWidth;
+  logo.classList.add("go");
+}
+
+$("reveal").onclick = reveal;
+$("next").onclick = next;
+document.addEventListener("keydown", e => {
+  if (e.key === " " || e.key === "Enter") {
+    e.preventDefault();
+    $("reveal").disabled ? next() : reveal();
+  }
+});
+
+shuffle();
+next();
+</script>
+</body>
+</html>
